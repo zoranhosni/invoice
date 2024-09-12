@@ -1,5 +1,5 @@
 {
     "database": {
-        "path": "database/invoice.db"
+        "path": "sqlite:///database/invoice.db"
     }
 }
