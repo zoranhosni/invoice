@@ -29,7 +29,7 @@ class ConfigJson(Config):
     Config JSON class
     """
 
-    __CONFIG_FILE = 'config/.config.json'
+    __CONFIG_FILE = 'config/config.json'
 
     def __init__(self):
         super().__init__()
