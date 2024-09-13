@@ -1,1 +1,2 @@
 sqlalchemy==2.0.34
+flet==0.24.1

@@ -12,7 +12,7 @@ class ConfigException(Exception):
 
 class Config(object):
     """
-    Base Config instance configured as a singleton class
+    Base Config class configured as a singleton class
     """
 
     __CONFIG_FILE = None

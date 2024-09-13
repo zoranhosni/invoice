@@ -4,6 +4,9 @@ LOG = logging.getLogger(__name__)
 
 
 class ObjectFactory(object):
+    """
+    Object factory class
+    """
 
     def __init__(self):
         self._creators = {}
@@ -23,6 +26,10 @@ object_factory = ObjectFactory()
 
 
 class ObjectBuilder(object):
+    """
+    Object builder class
+    """
+    
     def __init__(self, object_format):
         self._creator = object_factory.get_creator(object_format=object_format)
         self._format = object_format

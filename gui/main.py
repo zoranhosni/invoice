@@ -1,14 +1,17 @@
 from flet import (
     Page
 )
-
+from controller.invoice import InvoiceController
 
 class MainApp:
+    """
+    Main application class
+    """
 
-    def __init__(self, db_session, page: Page):
+    def __init__(self, controller: InvoiceController, page: Page):
 
         self.page = page
-        self.db_session = db_session
+        self.controller = controller
 
         self.page.title = "Invoice App"
 
