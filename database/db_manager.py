@@ -45,7 +45,6 @@ class DBManager:
         invoices = []
         try:
             if self.session is not None:
-                
                 result = self.session.query(Invoice).all()
                 for item in result:
                     invoices.append(item)
@@ -56,16 +55,15 @@ class DBManager:
     
     def get_products(self) -> List:
         """
-        Fetch all invoices from the database
+        Fetch all products from the database
 
         Returns:
-            List[Invoice]: List of Invoice objects
+            List[Product]: List of Product objects
         """
         from database.product import Product
         products = []
         try:
             if self.session is not None:
-                
                 result = self.session.query(Product).all()
                 for item in result:
                     products.append(item)
@@ -73,3 +71,4 @@ class DBManager:
             print(f'Exception occurred: {e}')
         
         return products
+    
