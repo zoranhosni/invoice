@@ -1,3 +1,4 @@
+from typing import List
 from controller.main import AppController
 from factory.main import ObjectBuilder
 from flet import app
@@ -22,6 +23,9 @@ class InvoiceController(AppController):
         # Start GUI
         from gui.main import MainApp
         app(target=lambda page: MainApp(controller=self, page=page))
+    
+    def get(self) -> List :
+        return self.db_manager.get_invoices()
     
     def release(self):
         self.db_session = None
