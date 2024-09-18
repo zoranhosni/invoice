@@ -2,7 +2,11 @@ from typing import List
 from controller.main import AppController
 from factory.main import ObjectBuilder
 from flet import app
-import database.db_manager
+from database.invoice import (
+    Invoice,
+    get_rows,
+    get_columns,
+)
 import config.config_json  # to register JSON config creator
 
 
@@ -16,7 +20,7 @@ class InvoiceController(AppController):
     def __init__(self):
         super().__init__()
         self.config = ObjectBuilder(object_format=CONFIG_FORMAT).build().as_object()
-        self.db_manager = database.db_manager.DBManager(db_path=self.config.database.path)
+        self.db_path=self.config.database.path
 
 
     def run(self):
@@ -24,8 +28,11 @@ class InvoiceController(AppController):
         from gui.main import MainApp
         app(target=lambda page: MainApp(controller=self, page=page))
     
-    def get(self) -> List :
-        return self.db_manager.get_invoices()
+    def get_columns(self):
+        return get_columns(db_path=self.db_path)
+
+    def get_rows(self) -> List[Invoice] :
+        return get_rows(db_path=self.db_path)
     
     def release(self):
         self.db_session = None
@@ -33,3 +40,4 @@ class InvoiceController(AppController):
     def exit(self):
         self.release()
         exit(0)
+    

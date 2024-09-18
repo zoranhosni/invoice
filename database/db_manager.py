@@ -1,4 +1,3 @@
-from typing import List
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -33,42 +32,4 @@ class DBManager:
         session_ = sessionmaker(bind=self.engine)
 
         return session_()
-
-    def get_invoices(self) -> List:
-        """
-        Fetch all invoices from the database
-
-        Returns:
-            List[Invoice]: List of Invoice objects
-        """
-        from database.invoice import Invoice
-        invoices = []
-        try:
-            if self.session is not None:
-                result = self.session.query(Invoice).all()
-                for item in result:
-                    invoices.append(item)
-        except Exception as e:
-            print(f'Exception occurred: {e}')
-        
-        return invoices
-    
-    def get_products(self) -> List:
-        """
-        Fetch all products from the database
-
-        Returns:
-            List[Product]: List of Product objects
-        """
-        from database.product import Product
-        products = []
-        try:
-            if self.session is not None:
-                result = self.session.query(Product).all()
-                for item in result:
-                    products.append(item)
-        except Exception as e:
-            print(f'Exception occurred: {e}')
-        
-        return products
     

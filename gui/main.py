@@ -23,11 +23,11 @@ class MainApp:
         self.create_interface()
     
     def create_interface(self):
-        self.page.navigation_bar = NavigationBar(
-            destinations=[
-                NavigationDestination(label="Invoices", icon=icons.BUSINESS),
-                NavigationDestination(label="Products", icon=icons.PRODUCTION_QUANTITY_LIMITS)
-            ]
-        )
-        # self.page.navigation_bar = AppNavigationBar()
+        # self.page.navigation_bar = NavigationBar(
+        #     destinations=[
+        #         NavigationDestination(label="Invoices", icon=icons.BUSINESS),
+        #         NavigationDestination(label="Products", icon=icons.PRODUCTION_QUANTITY_LIMITS)
+        #     ]
+        # )
+        self.page.navigation_bar = AppNavigationBar(controller=self.controller, page=self.page)
         self.page.update()
