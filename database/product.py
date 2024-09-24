@@ -24,22 +24,36 @@ class Product(Base):
 
 def get_rows(db_path: str) -> List[Product]:
     session = DBManager(db_path=db_path).session
-    invoices = []
+    products = []
     try:
         if session is not None:
             result = session.query(Product).all()
             for item in result:
-                invoices.append(item)
+                products.append(item)
     except Exception as e:
         print(f'Exception occurred: {e}')
-    return invoices
+    return products
 
-def get_columns(db_path: str) -> List[str]:
+def get_columns() -> List[str]:
+    
+    return Product.__table__.columns.keys()
+
+def get_products_by_invoice_id(db_path: str, invoice_id: int) -> List[object]:
+    """
+    Fetch the products from the database
+    Args:
+        invoice_id (int): Invoice ID
+    Returns:
+        List[object]: List of database Product objects
+    """
+
     session = DBManager(db_path=db_path).session
+    products = []
     try:
         if session is not None:
-            return session.query(Product).column_descriptions
+            result = session.query(Product).filter_by(invoice_id=invoice_id)
+            for item in result:
+                products.append(item)
     except Exception as e:
         print(f'Exception occurred: {e}')
-    
-    return None
+    return products

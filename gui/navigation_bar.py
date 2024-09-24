@@ -1,22 +1,20 @@
 from flet import (
-    UserControl,
     NavigationBar,
     NavigationDestination,
     icons,
     RouteChangeEvent,
     Page,
-    DataTable,
-    DataColumn,
-    Text,
 )
 from view.invoice import InvoiceView
+from view.product import ProductView
+from controller.invoice import InvoiceController
+from controller.product import ProductController
 
 
 class AppNavigationBar(NavigationBar):
     
-    def __init__(self, controller, page: Page, *args, **kwargs):
+    def __init__(self, page: Page, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.controller = controller
         self.page = page
         self.destinations = [
             NavigationDestination(
@@ -32,19 +30,16 @@ class AppNavigationBar(NavigationBar):
 
     def navigation_change(self, e: RouteChangeEvent) -> None:
         self.selected_index = e.control.selected_index
-        print(self.selected_index)
-        if self.selected_index == 0:
-            view = InvoiceView(controller=self.controller)
-            self.page.add(view)
-            # self.page.add(
-            #     DataTable(
-            #         columns=[
-            #             DataColumn(Text("First name")),
-            #             DataColumn(Text("Last name")),
-            #             DataColumn(Text("Age"), numeric=True),
-            #         ],
-            #     )
-            # )
-            
-        
+        print(f'Selected index: {self.selected_index}')
 
+        # Remove last view
+        self.page.controls.pop() if self.page.controls else None
+        view = None
+
+        if self.selected_index == 0:
+            view = InvoiceView(controller=InvoiceController())        
+            
+        elif self.selected_index == 1:
+            view = ProductView(controller=ProductController())
+        
+        self.page.add(view)

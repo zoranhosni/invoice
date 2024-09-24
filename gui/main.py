@@ -1,10 +1,8 @@
 from flet import (
     Page,
-    NavigationBar,
-    NavigationDestination,
-    icons,
+    CrossAxisAlignment
 )
-from controller.invoice import InvoiceController
+from controller.main import AppController
 from gui.navigation_bar import AppNavigationBar
 
 
@@ -13,12 +11,11 @@ class MainApp:
     Main application class
     """
 
-    def __init__(self, controller: InvoiceController, page: Page):
+    def __init__(self, page: Page):
 
         self.page = page
-        self.controller = controller
         self.page.title = "Invoice App"
-        # self.navigation_bar = AppNavigationBar()
+        self.page.horizontal_alignment = CrossAxisAlignment.CENTER
         self.page.update()
         self.create_interface()
     
@@ -29,5 +26,5 @@ class MainApp:
         #         NavigationDestination(label="Products", icon=icons.PRODUCTION_QUANTITY_LIMITS)
         #     ]
         # )
-        self.page.navigation_bar = AppNavigationBar(controller=self.controller, page=self.page)
+        self.page.navigation_bar = AppNavigationBar(page=self.page)
         self.page.update()

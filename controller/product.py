@@ -1,13 +1,13 @@
 from typing import List
 from controller.main import AppController
-from database.invoice import (
-    Invoice,
+from database.product import (
+    Product,
     get_rows,
     get_columns,
 )
 
 
-class InvoiceController(AppController):
+class ProductController(AppController):
     """
     Invoice Controller Instance
     """
@@ -17,6 +17,6 @@ class InvoiceController(AppController):
     def get_columns(self):
         return get_columns()
 
-    def get_rows(self) -> List[Invoice] :
+    def get_rows(self) -> List[Product] :
         return get_rows(db_path=self.db_path)
     

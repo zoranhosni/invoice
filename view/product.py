@@ -7,12 +7,12 @@ from flet import (
     TextField,
     border
 )
-from controller.invoice import InvoiceController
+from controller.product import ProductController
 
 
-class InvoiceView(DataTable):
+class ProductView(DataTable):
 
-    def __init__(self, controller: InvoiceController, *args, **kwargs) -> None:
+    def __init__(self, controller: ProductController, *args, **kwargs) -> None:
         self.controller = controller
         super().__init__(*args, **kwargs)
 
@@ -25,8 +25,11 @@ class InvoiceView(DataTable):
         ids = [row.id for row in rows]
         print(f'IDs: {ids}')
 
-        issue_dates = [row.issue_date for row in rows]
-        print(f'Issue dates: {issue_dates}')
+        names = [row.name for row in rows]
+        print(f'Names: {names}')
+
+        prices = [row.price for row in rows]
+        print(f'Prices: {prices}')
 
         self.columns = [
             DataColumn(Text(column.upper(), size=12, color="black")) for column in columns
@@ -35,7 +38,8 @@ class InvoiceView(DataTable):
         self.last_row = DataRow(
             cells=[
                 DataCell(Text("ID will be updated automatically")),
-                DataCell(TextField(hint_text="Enter Issue Date here", expand=True)),
+                DataCell(TextField(hint_text="Enter product name here", expand=True)),
+                DataCell(TextField(hint_text="Enter product price here", expand=True)),
             ]
         )
 
@@ -55,3 +59,4 @@ class InvoiceView(DataTable):
         self.border = border.all(2, "#ebebeb")
         self.horizontal_lines = border.BorderSide(1, "#ebebeb")
         self.vertical_lines = border.BorderSide(1, "#ebebeb")
+        

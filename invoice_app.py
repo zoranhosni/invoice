@@ -1,8 +1,8 @@
-from controller.invoice import InvoiceController
+from controller.main import AppController
 
 
 def main():
-    controller = InvoiceController()
+    controller = AppController()
     controller.run()
 
 

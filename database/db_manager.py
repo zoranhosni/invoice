@@ -13,23 +13,37 @@ class DBManagerException(Exception):
     pass
 
 
-class DBManager:
+class DBManagerSingleton(object):
     """
-    DB Manger class
+    Base DB Manager class configured as a singleton
+    """
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(DBManagerSingleton, cls).__new__(cls, *args, **kwargs)
+        return cls.instance
+
+
+class DBManager(object):
+    """
+    DB Manager class
 
     It's an interface towards the data stored in the database
     """
+    
     def __init__(self, db_path) -> None:
         self.db_path = db_path
         self.engine = None
         self.session = self._connect()
-
+    
     def _connect(self):
         import database.invoice
         import database.product
-        self.engine = create_engine(self.db_path)
-        Base.metadata.create_all(self.engine)
-        session_ = sessionmaker(bind=self.engine)
+        if self.db_path:
+            self.engine = create_engine(self.db_path)
+            Base.metadata.create_all(self.engine)
+            session_ = sessionmaker(bind=self.engine)
 
-        return session_()
+            return session_()
+        return None
     
