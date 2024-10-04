@@ -29,13 +29,13 @@ class InvoiceView(DataTable):
         print(f'Issue dates: {issue_dates}')
 
         self.columns = [
-            DataColumn(Text(column.upper(), size=12, color="black")) for column in columns
+            DataColumn(Text(column, size=12, color="black")) for column in columns
         ]
 
         self.last_row = DataRow(
             cells=[
-                DataCell(Text("ID will be updated automatically")),
-                DataCell(TextField(hint_text="Enter Issue Date here", expand=True)),
+                DataCell(Text("")),
+                DataCell(TextField(hint_text="Enter Issue date here", expand=True)),
             ]
         )
 
@@ -45,10 +45,10 @@ class InvoiceView(DataTable):
                     DataCell(Text(row)) for row in rows 
                 ]
             )
-        ] if len(rows) > 0 else [self.last_row]
+        ] if len(rows) > 0 else []
 
-        self.rows += [self.last_row] if len(rows) > 0 else []
-        print(f'Rows: {self.rows}')
+        self.rows.append(self.last_row)
+        print(f'Table rows: {self.rows}')
 
         self.expand = True
         self.border_radius = 8

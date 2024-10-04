@@ -43,3 +43,4 @@ class AppNavigationBar(NavigationBar):
             view = ProductView(controller=ProductController())
         
         self.page.add(view)
+        print(f'Page controls: {self.page.controls}')

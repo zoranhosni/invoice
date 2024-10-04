@@ -15,7 +15,9 @@ class ProductController(AppController):
         super().__init__()
     
     def get_columns(self):
-        return get_columns()
+        columns = get_columns()
+        columns = [column.replace('_', ' ').capitalize() for column in columns]
+        return columns
 
     def get_rows(self) -> List[Product] :
         return get_rows(db_path=self.db_path)
